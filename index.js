@@ -25,10 +25,10 @@ function getColor(){
 io.on('connection', function(client){
     
     client.on('user connect', function(newConnection){
-
         var name = newConnection.user
         var room = newConnection.docId
         var clientId = client.id
+
         var color = getColor();
 
         client.join(room);
@@ -45,7 +45,6 @@ io.on('connection', function(client){
     client.on('others users on room', function(received){
         var users = received.users
         var toUser = received.toUser
-
         io.to(toUser).emit('users on room', users)
     });
 
@@ -55,7 +54,7 @@ io.on('connection', function(client){
     
 });
 
-
 http.listen(PORT, function(){
     console.log(`listening on *:5000`);
 });
+
